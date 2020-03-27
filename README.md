@@ -1,10 +1,10 @@
 # KivaProxy
 
-#Installing
+# Installing
 `
 npm install --save @kivacrm/kiva-proxy
 `
-#Importing
+# Importing
 ES6
 
 ```
@@ -23,11 +23,11 @@ browser
 <script src="[path]/KivaProxy.min.js"></script>
 ```
 
-#Examples
+# Examples
 
 
 
-##Basic usage
+## Basic Usage
 ```javascript
 const myAppTodo = new KivaProxy({endpoint:'myapp/todos'})
 
@@ -68,7 +68,7 @@ myAppTodo.destroy([1,5,7])
 
 ```
 
-#Advanced Settings
+# Advanced Settings
 ```javascript
 const myAppTodo = new KivaProxy({endpoint:'myapp/todos'})
 
@@ -102,7 +102,7 @@ myAppTodo.setDir('DESC')
 // get Results
 myAppTodo.all()
 ```
-##short way
+## Short Way
 ```javascript
 const myAppTodo = new KivaProxy({endpoint:'myapp/todos'})
 
@@ -118,7 +118,7 @@ myAppTodo
   .setDir('DESC')
   .all()
 ```
-##clear paramaters
+## Clear Paramaters
 ```javascript
 const myAppTodo = new KivaProxy({endpoint:'myapp/todos'})
 
@@ -135,7 +135,7 @@ myAppTodo.removeParameter('keyword')
 // request again without keyword params
 myAppTodo.all()
 ```
-##clear multiple paramater
+## Clear Multiple Paramater
 ```javascript
 const myAppTodo = new KivaProxy({endpoint:'myapp/todos'})
 
@@ -153,7 +153,7 @@ myAppTodo.removeParameter(['keyword', 'limit'])
 myAppTodo.all()
 ```
 
-##clear all paramaters
+## Clear All Paramaters
 ```javascript
 const myAppTodo = new KivaProxy({endpoint:'myapp/todos'})
 
