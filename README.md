@@ -170,3 +170,16 @@ myAppTodo.clearParameters()
 // request again without any params
 myAppTodo.all()
 ```
+
+## Create Custom Http Driver
+
+```javascript
+// createHttpDriver use axios, first argument name of driver, second is a axios config
+KivaProxy.global.createHttpDriver('custom', {
+  baseURL: `https://my-custom.api/v1`,
+})
+
+const customData = new KivaProxy({endpoint:'data', driver: 'custom'})
+
+customData.all()
+```

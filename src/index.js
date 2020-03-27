@@ -1,15 +1,16 @@
 import { version } from '../package.json'
-import { kivaxios, kivaxiosCustom } from './utils/kivaxios'
 import { validateAndParseIds } from './utils/validateAndParseIds'
 import { validateAndTransformRecords } from './utils/validateAndTransformRecords'
 import { getType } from './utils/getType'
+import axios from 'axios'
+import { BRIDGE_URL } from './constants'
 
 export default class KivaProxy {
-  constructor ({ endpoint, parameters = {}, config = {} }) {
+  constructor ({ endpoint, parameters = {}, config = {}, driver = 'default' }) {
     this.endpoint = endpoint
     this.parameters = parameters
-    this.$httpDrivers = this.__proto__.$http
-    this.httpDriver = 'default'
+    this.$httpDrivers = KivaProxy.global.httpDrivers
+    this.httpDriver = driver
   }
 
   all () {
@@ -113,7 +114,6 @@ export default class KivaProxy {
     Object.keys(parameters).forEach((key) => {
       this.parameters[key] = parameters[key]
     })
-
     return this
   }
 
@@ -126,13 +126,11 @@ export default class KivaProxy {
     parameters.forEach((parameter) => {
       delete this.parameters[parameter]
     })
-
     return this
   }
 
   removeParameter (parameter) {
     delete this.parameters[parameter]
-
     return this
   }
 
@@ -156,10 +154,19 @@ export default class KivaProxy {
     return parameterStrings.length === 0 ? '' : `?${parameterStrings.join('&')}`
   }
 }
-KivaProxy.$global = KivaProxy.prototype
-KivaProxy.prototype.config = {}
-KivaProxy.prototype.$http = {
-  default: kivaxios,
-  custom: kivaxiosCustom
+KivaProxy.global = KivaProxy.prototype
+KivaProxy.global.config = {}
+KivaProxy.global.createHttpDriver = function (name, config) {
+  if (this.httpDrivers.hasOwnProperty(name)) {
+    throw new Error(`${name} http driver already registed`)
+  }
+  this.httpDrivers[name] = axios.create(config)
 }
-KivaProxy.prototype.version = version
+KivaProxy.global.httpDrivers = {}
+KivaProxy.global.version = version
+
+KivaProxy.global.createHttpDriver('default', {
+  withCredentials: true,
+  baseURL: `${BRIDGE_URL}/data`,
+  headers: {},
+})
