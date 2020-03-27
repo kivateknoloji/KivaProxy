@@ -3290,7 +3290,7 @@
 
 	var axios$1 = axios_1;
 
-	var BRIDGE_URL = 'https://app.rulesup.com/kiva/jsapi/bridge';
+	var BRIDGE_URL = 'https://app.kivacrm.com/kiva/jsapi/bridge';
 	var IDS_LIMIT = 50;
 
 	var kivaxios = axios$1.create({

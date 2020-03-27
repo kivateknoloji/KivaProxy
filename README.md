@@ -62,7 +62,7 @@ myAppTodo.update([
 myAppTodo.destroy(1)
 
 
-// delete multipke Todo
+// delete multiple Todo
 
 myAppTodo.destroy([1,5,7])
 
@@ -82,7 +82,7 @@ myAppTodo.getEmpty(false)
 myAppTodo.setFields(['title', 'status'])
 
 // Set filters Settings
-myAppTodo.setFields({"status": ["=", true]})
+myAppTodo.setFilters({"status": ["=", true]})
 
 // Set keyword Settings
 myAppTodo.setKeyword('todo')
@@ -110,7 +110,7 @@ myAppTodo
   .setViewId('all')
   .getEmpty(false)
   .setFields(['title', 'status'])
-  .setFields({"status": ["=", true]})
+  .setFilters({"status": ["=", true]})
   .setKeyword('todo')
   .setStart(2)
   .setLimit(10)
