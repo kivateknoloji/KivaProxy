@@ -32,7 +32,7 @@ export default class KivaProxy {
 
   destroy (ids, config = {}) {
     const suffix = validateAndParseIds(ids)
-    return this.submit('delete', `/${this.endpoint}/${suffix}`, { ...config })
+    return this.submit('delete', `/${this.endpoint}/${suffix}`, { data: config })
   }
 
   submit (requestType, url, data = null) {
