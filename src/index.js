@@ -30,9 +30,9 @@ export default class KivaProxy {
     return this.submit('patch', `/${this.endpoint}`, { ...config, records: validateAndTransformRecords(records) })
   }
 
-  destroy (ids) {
+  destroy (ids, config = {}) {
     const suffix = validateAndParseIds(ids)
-    return this.submit('delete', `/${this.endpoint}/${suffix}`)
+    return this.submit('delete', `/${this.endpoint}/${suffix}`, { ...config })
   }
 
   submit (requestType, url, data = null) {
